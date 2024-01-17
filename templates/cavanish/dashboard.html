@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{request.user}} Dashboard</title>
+</head>
+<body>
+<small><a href=" {% url 'home' %}"><</a></small>
+    
+    <h2>Dashboard</h2>
+    
+    <p>My Rooms: {{tenant.room}}</p>
+    <p>My Room Rent: £ {{tenant.room.rent_amount}}</p>
+<form action="{% url 'create_payment' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Make Payment</button>
+</form>
+
+<h2>My Previous  Payment</h2>
+{% for payment in payments %}
+
+<div class="payment">
+    <em>{{ forloop.counter}}</em>
+    <p>{{payment.name}}</p>
+    <b>You payed £ {{payment.amount_payed}} at {{payment.date_payed}}</b>
+    <p>Payment was made <b> {{ payment.payment_method}}</b></p>
+    <p>Payment Succesfull</p>
+</div>
+<br>
+    
+    {% empty %}
+        <p>No Payments have been Made </p>
+{% endfor %}
+</body>
+</html>

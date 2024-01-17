@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+
+<nav>
+{% if request.user.is_authenticated %}
+    <p>Hello {{request.user}}</p>
+    {% if answer %}
+        <small><a href="{% url 'update-info' %}">Complete Profile</a></small>
+    {% else%}
+    {% endif %}
+    <em><a href="{% url 'dashboard' %}">Dashboard</a></em>
+    <a href="{% url 'signout' %}">Logout</a>
+  {% else %}
+      <button><a href="{% url 'signin' %}">Sigin</a></button>
+      <button><a href="{% url 'register' %}">Register</a></button>
+{% endif %}    
+</nav>    
+
+<h2>Welcome to Cavanish Home</h2>
+
+{{answer}}
+
+<a href=""></a>
+
+<form action="{% url 'search_results' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
+
+      
+</body>
+</html>
